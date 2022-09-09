@@ -7,8 +7,9 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 // implement a reentrancy guard contract that will protect the marketplace from reentrancy attacks
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-
 // https://docs.openzeppelin.com/contracts/4.x/api/security#ReentrancyGuard
+
+import "hardhat/console.sol";
 
 contract Marketplace is ReentrancyGuard {
     // State variable
@@ -110,6 +111,7 @@ contract Marketplace is ReentrancyGuard {
         // pay seller and feeAccount
         item.seller.transfer(item.price);
         feeAccount.transfer(_totalPrice - item.price);
+        console.log("Fee to transfer: ", _totalPrice - item.price);
 
         // update item to sold
         item.sold = true;
