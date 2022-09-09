@@ -18,3 +18,32 @@ pragma solidity ^0.8.4;
 */
 
 // Import ERC-721 URI storage contract from OpenZeppelin library
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+
+contract NFT is ERC721URIStorage {
+    // first we have to Inherit 'ERC-21' contract into our Contract
+
+    // state variable to keep track of number of tokens
+    uint256 public tokenCount;
+
+    constructor() ERC721("DApp NFT", "DAPP") {
+        // we will first call the constructor of the 'ERC721' smart contract
+        // ERC721("<name_of_the_NFT> <symbol_of_the_NFT>","<name_of_the_NFT_on_caps")
+    }
+
+    // function to mint New NFTs
+    function mint(string memory _tokenURI) external returns (uint256) {
+        // _tokenURI: metadata of NFT (content of the NFT that we can find on IPFS)
+
+        tokenCount++;
+        // Mint new NFT
+        _safeMint(msg.sender, tokenCount);
+        // _safeMint(<sender>,<tokenId>)
+
+        // function to set TokenURI
+        _setTokenURI(tokenCount, _tokenURI);
+
+        // function return current token count which is correspond to new Id of the invented token
+        return tokenCount;
+    }
+}
