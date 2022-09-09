@@ -1,0 +1,13 @@
+*) What are NFTs?
+    -> non-fungible token, means that it can't be interchanged for another with in the same collection
+    -> Like ETH, Bitcoin, Dolor are interchangeable but NFTs can't
+    -> Each NFTs values different
+    -> NFTs smart contract also keep track of the owners of each NFTs
+    -> there are special function on the contract that allow us to transfer NFTs to new addresses
+
+*) About Project:
+    -> so we will going to write Marketplace contract that interact with these function on nft contract to allow users to buy and sell NFTs
+    -> When user want to list their NFTs for sale they will call the function that will transfer there NFTs to the marketplace 
+    -> and the marketplace will keep tract of the seller of the NFTs and the price they want to sell it at
+    -> User can buy and listed NFTs by calling a function that transfers the amount of ether the nft was priced at from the buyer to the seller then transfer the NFTs from the marketplace to the buyer
+    -> also our NFTs contract will have mint function that will allow sellers to create new NFTs and then list them on the marketplace
