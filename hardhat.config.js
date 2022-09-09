@@ -6,6 +6,6 @@ module.exports = {
     artifacts: "./src/backend/artifacts",
     sources: "./src/backend/contracts",
     cache: "./src/backend/cache",
-    tests: "./src/backend/test"
+    tests: "./src/backend/test",
   },
 };
