@@ -74,7 +74,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className="App">
         <Navigation web3Handler={web3Handler} account={account} />
         {loading ? (
           // while loading load this component
@@ -92,10 +92,10 @@ function App() {
         ) : (
           // after get loaded open routed component
           <Routes>
-            {/* <Route
+            <Route
               path="/"
               element={<Home marketplace={marketplace} nft={nft} />}
-            /> */}
+            />
             {/* <Route path="/create" element={
                 <Create marketplace={marketplace} nft={nft} />
               } />
