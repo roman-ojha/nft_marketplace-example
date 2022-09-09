@@ -11,3 +11,9 @@
     -> and the marketplace will keep tract of the seller of the NFTs and the price they want to sell it at
     -> User can buy and listed NFTs by calling a function that transfers the amount of ether the nft was priced at from the buyer to the seller then transfer the NFTs from the marketplace to the buyer
     -> also our NFTs contract will have mint function that will allow sellers to create new NFTs and then list them on the marketplace
+
+*) Dependencies that we need:
+    -> NodeJS
+    -> Hardhat
+        -> yarn add -D hardhat@2.8.3 (download this specific version) 
+    -> Starter for this project: https://github.com/dappuniversity/starter_kit_2
