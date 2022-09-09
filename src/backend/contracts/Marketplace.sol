@@ -30,13 +30,23 @@ contract Marketplace is ReentrancyGuard {
         bool sold;
     }
 
-    // need to create the event so that we can listen to it
+    // need to create the event so that we can listen to after item get created
     event Offered(
         uint256 itemId,
         address indexed nft,
         uint256 tokenId,
         uint256 price,
         address indexed seller
+    );
+
+    // Bought event will get emitted when user purchase the item/NFTs
+    event Bought(
+        uint256 itemId,
+        address indexed nft,
+        uint256 tokenId,
+        uint256 price,
+        address indexed seller,
+        address indexed buyer
     );
 
     // store all the item into mapping
@@ -81,5 +91,46 @@ contract Marketplace is ReentrancyGuard {
         emit Offered(itemCount, address(_nft), _tokenId, _price, msg.sender);
     }
 
-    // function to list NFTs for sale
+    // function to purchase NFTs
+    function purchaseItem(uint256 _itemId) external payable nonReentrant {
+        // this function will also use as payable
+        // and the ether will be send to seller of the item & small portion to the fee account
+
+        uint256 _totalPrice = getTotalPrice(_itemId);
+
+        // get item that user want to purchase
+        Item storage item = items[_itemId];
+        require(_itemId > 0 && _itemId <= itemCount, "item doesn't exist");
+        require(
+            msg.value >= _totalPrice,
+            "not enough ether to cover item price and market fee"
+        );
+        require(!item.sold, "item already sold");
+
+        // pay seller and feeAccount
+        item.seller.transfer(item.price);
+        feeAccount.transfer(_totalPrice - item.price);
+
+        // update item to sold
+        item.sold = true;
+
+        // transfer nft from marketplace to buyer
+        item.nft.transferFrom(address(this), msg.sender, item.tokenId);
+
+        // emit Bought event
+        emit Bought(
+            _itemId,
+            address(item.nft),
+            item.tokenId,
+            item.price,
+            item.seller,
+            msg.sender
+        );
+    }
+
+    function getTotalPrice(uint256 _itemId) public view returns (uint256) {
+        // function to get the total price of the item
+        // totalPrice = price of the item + market fees
+        return ((items[_itemId].price * (100 + feePercent)) / 100);
+    }
 }
