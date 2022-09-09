@@ -20,6 +20,7 @@ import { ethers } from "ethers";
 
 // import Component
 import Navigation from "./Navbar";
+import Home from "./Home";
 
 function App() {
   // account will contain the account that is connected to the app
@@ -91,10 +92,11 @@ function App() {
         ) : (
           // after get loaded open routed component
           <Routes>
-            {/* <Route path="/" element={
-                <Home marketplace={marketplace} nft={nft} />
-              } />
-              <Route path="/create" element={
+            {/* <Route
+              path="/"
+              element={<Home marketplace={marketplace} nft={nft} />}
+            /> */}
+            {/* <Route path="/create" element={
                 <Create marketplace={marketplace} nft={nft} />
               } />
               <Route path="/my-listed-items" element={
