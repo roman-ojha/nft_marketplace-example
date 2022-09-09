@@ -24,7 +24,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "deploy": "npx hardhat run src/backend/scripts/deploy.js --network localhost",
+    "deploy": "npx hardhat run src/backend/scripts/deploy.ts --network localhost",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
