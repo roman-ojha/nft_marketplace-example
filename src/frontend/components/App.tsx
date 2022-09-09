@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.png";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import "./App.css";
@@ -21,6 +20,7 @@ import { ethers } from "ethers";
 // import Component
 import Navigation from "./Navbar";
 import Home from "./Home";
+import Create from "./Create";
 
 function App() {
   // account will contain the account that is connected to the app
@@ -96,10 +96,11 @@ function App() {
               path="/"
               element={<Home marketplace={marketplace} nft={nft} />}
             />
-            {/* <Route path="/create" element={
-                <Create marketplace={marketplace} nft={nft} />
-              } />
-              <Route path="/my-listed-items" element={
+            <Route
+              path="/create"
+              element={<Create marketplace={marketplace} nft={nft} />}
+            />
+            {/* <Route path="/my-listed-items" element={
                 <MyListedItems marketplace={marketplace} nft={nft} account={account} />
               } />
               <Route path="/my-purchases" element={
