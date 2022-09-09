@@ -17,3 +17,12 @@
     -> Hardhat
         -> yarn add -D hardhat@2.8.3 (download this specific version) 
     -> Starter for this project: https://github.com/dappuniversity/starter_kit_2
+    -> react-router-dom
+    -> IPFS HTTP client
+        -> (to upload content of NTFs to IPFS)
+        -> yarn add ipfs-http-client@56.0.1
+    -> OpenZeppelin
+        -> (it is a contract library that contain secure pre made contract that we can import into the projects when writing the new contract)
+        -> (we will going to use this to import ERC-721 NFTs standard)
+        -> https://www.openzeppelin.com/
+        -> yarn add @openzeppelin/contracts@4.5.0
