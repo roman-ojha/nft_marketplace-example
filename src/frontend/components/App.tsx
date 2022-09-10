@@ -22,6 +22,7 @@ import Navigation from "./Navbar";
 import Home from "./Home";
 import Create from "./Create";
 import MyListedItems from "./MyListenItems";
+import MyPurchases from "./MyPurchases";
 
 function App() {
   // account will contain the account that is connected to the app
@@ -111,9 +112,16 @@ function App() {
                 />
               }
             />
-            {/* <Route path="/my-purchases" element={
-                <MyPurchases marketplace={marketplace} nft={nft} account={account} />
-              } /> */}
+            <Route
+              path="/my-purchases"
+              element={
+                <MyPurchases
+                  marketplace={marketplace}
+                  nft={nft}
+                  account={account}
+                />
+              }
+            />
           </Routes>
         )}
       </div>
