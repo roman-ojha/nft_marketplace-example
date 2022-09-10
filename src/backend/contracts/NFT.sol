@@ -34,6 +34,7 @@ contract NFT is ERC721URIStorage {
     // function to mint New NFTs
     function mint(string memory _tokenURI) external returns (uint256) {
         // _tokenURI: metadata of NFT (content of the NFT that we can find on IPFS)
+        //
 
         tokenCount++;
         // Mint new NFT

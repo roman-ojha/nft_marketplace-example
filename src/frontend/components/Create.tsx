@@ -2,9 +2,29 @@ import React, { useState } from "react";
 import { ethers } from "ethers";
 import { Row, Form, Button } from "react-bootstrap";
 import { create as ipfsHttpClient } from "ipfs-http-client";
+import { Buffer } from "buffer";
 
-const client = ipfsHttpClient({ url: "https://ipfs.infura.io:5001/api/v0" });
+// Setup IPFs:
+// https://docs.infura.io/infura/networks/ipfs/how-to/make-requests#ipfs-http-client
 // allow to update metadata about the newly created NFTs to IPFS for this component
+const infuraProjectId = process.env.REACT_APP_INFURA_PROJECT_ID;
+const infuraProjectSecret = process.env.REACT_APP_INFURA_PROJECT_SECRET;
+const auth =
+  "Basic " +
+  Buffer.from(infuraProjectId + ":" + infuraProjectSecret).toString("base64");
+// const client = ipfsHttpClient({
+//   host: "localhost",
+//   port: 5001,
+//   protocol: "http",
+// });
+const client = ipfsHttpClient({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+  headers: {
+    authorization: auth,
+  },
+});
 
 const Create = ({ marketplace, nft }) => {
   const [image, setImage] = useState("");
@@ -27,7 +47,8 @@ const Create = ({ marketplace, nft }) => {
         const result = await client.add(file);
         console.log(result);
         // store Image url to state
-        setImage(`https://ipfs.infura.io/ipfs/${result.path}`);
+        setImage(`https://roman.infura-ipfs.io/ipfs/${result.path}`);
+        console.log(`https://roman.infura-ipfs.io/ipfs/${result.path}`);
       } catch (error) {
         console.log("ipfs image upload error: ", error);
       }
@@ -42,10 +63,14 @@ const Create = ({ marketplace, nft }) => {
 
     // after done interacting with IPFs this function will Mint and then List the NFTs for sell on the marketplace
     try {
+      console.log({ image, price, name, description });
+
       // add metadata to IPFS into JSON object format
       const result = await client.add(
         JSON.stringify({ image, price, name, description })
       );
+
+      console.log(result);
 
       // call the function that will mint the NFT
       mintThenList(result);
@@ -56,7 +81,8 @@ const Create = ({ marketplace, nft }) => {
 
   // this function will mint the nft and the list that NFT as item
   const mintThenList = async (result) => {
-    const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
+    const uri = `https://roman.infura-ipfs.io/ipfs/${result.path}`;
+    console.log(uri);
     // mint nft
     await (await nft.mint(uri)).wait();
     // get tokenId of new nft
