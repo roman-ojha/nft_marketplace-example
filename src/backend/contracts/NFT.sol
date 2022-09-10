@@ -8,6 +8,7 @@ pragma solidity ^0.8.4;
         -> ERC721 Standard define the set of all function that a NFTs contract should have in minimum
         -> This standard is design so that any NFT contract is compatible to any Dapps and wallets
         -> ERC-721 Function / Api
+        -> we can use ERC721 to create Non-fungible token, to create fungible token we have to use ERC20
         -> https://docs.openzeppelin.com/contracts/4.x/api/token/erc721
         -> this contract have a lot of function we don't need a lot of function for this project but that function that we have to understand for this project are:
             1) transferFrom(from, to, tokenId)
@@ -34,7 +35,8 @@ contract NFT is ERC721URIStorage {
     // function to mint New NFTs
     function mint(string memory _tokenURI) external returns (uint256) {
         // _tokenURI: metadata of NFT (content of the NFT that we can find on IPFS)
-        //
+        // _tokenURI look like this: https://roman.infura-ipfs.io/ipfs/FJDAS48392FMDA7432VDS44832
+        // inside that link we can get: {"image":"https://ipfs.infura.io/ipfs/FE43jfds5443","price":3,"name":"Roman","description":"for testing"}
 
         tokenCount++;
         // Mint new NFT
